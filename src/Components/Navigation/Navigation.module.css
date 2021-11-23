@@ -1,0 +1,17 @@
+.navigation {
+  display: flex;
+  border-bottom: 1px solid #aaaa;
+}
+
+.link {
+  display: inline-block;
+  padding-bottom: 20px;
+  padding-top: 20px;
+  margin-left: 20px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.activeLink {
+  color: rgb(0, 89, 255);
+}
