@@ -10,21 +10,21 @@ async function fetchWithErrorHandling(url = '', config = {}) {
 
 
 export  function trendMoviedbAPI() {
-    return fetchWithErrorHandling(`${BASE_URL}/trending/all/day?api_key=${API_KEY}`)
+    return fetchWithErrorHandling(`${BASE_URL}/trending/movie/day?api_key=${API_KEY}`)
 };
 
 export function searchMoviedbAPI(query) {
     return fetchWithErrorHandling(`${BASE_URL}/search/movie?api_key=${API_KEY}&query=${query}&page=1`)
 };
 
-export function detailsMoviedbAPI(movie_id) {
-    return fetchWithErrorHandling(`${BASE_URL}/movie/${movie_id}?api_key=${API_KEY}`)
+export function detailsMoviedbAPI(movieId) {
+    return fetchWithErrorHandling(`${BASE_URL}/movie/${movieId}?api_key=${API_KEY}`)
 };
 
-export function actorsMoviedbAPI(movie_id) {
-    return fetchWithErrorHandling(`${BASE_URL}/movie/${movie_id}/credits?api_key=${API_KEY}`)
+export function actorsMoviedbAPI(movieId) {
+    return fetchWithErrorHandling(`${BASE_URL}/movie/${movieId}/credits?api_key=${API_KEY}`)
 };
 
-export function reviewsMoviedbAPI(movie_id) {
-    return fetchWithErrorHandling(`${BASE_URL}/movie/${movie_id}/reviews?api_key=${API_KEY}`)
+export function reviewsMoviedbAPI(movieId) {
+    return fetchWithErrorHandling(`${BASE_URL}/movie/${movieId}/reviews?api_key=${API_KEY}`)
 };
