@@ -8,6 +8,9 @@ import Navigation from './Components/Navigation';
 import HomePage from './views/HomePage';
 import MoviesPage from './views/MoviesPage';
 import MovieDetailsPage from './views/MovieDetailsPage';
+import Cast from './views/Cast';
+import Reviews from './views/Reviews';
+
 
 export default function App() {
     // const [name, setName] = useState('');
@@ -30,7 +33,15 @@ export default function App() {
              <MoviesPage />
            </Route>
 
-           <Route path="/movies/:movieId">
+           <Route path="/movies/:movieId/cast">
+             <Cast />
+           </Route>
+
+           <Route path="/movies/:movieId/reviews">
+             <Reviews />
+           </Route>
+
+           <Route path="/movies/:movieId" exact>
              <MovieDetailsPage />
            </Route>
 

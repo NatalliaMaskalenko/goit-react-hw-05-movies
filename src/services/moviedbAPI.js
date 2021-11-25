@@ -13,8 +13,8 @@ export  function trendMoviedbAPI() {
     return fetchWithErrorHandling(`${BASE_URL}/trending/movie/day?api_key=${API_KEY}`)
 };
 
-export function searchMoviedbAPI(query) {
-    return fetchWithErrorHandling(`${BASE_URL}/search/movie?api_key=${API_KEY}&query=${query}&page=1`)
+export function searchMoviedbAPI(name) {
+    return fetchWithErrorHandling(`${BASE_URL}/search/movie?api_key=${API_KEY}&query=${name}&page=1`)
 };
 
 export function detailsMoviedbAPI(movieId) {
