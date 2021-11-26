@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Link, useParams, useRouteMatch } from 'react-router-dom';
 import * as moviedbAPI from '../services/moviedbAPI';
-import MovieDetails from '../Components/MovieDetails'
+import MovieDetails from '../Components/MovieDetails';
+
 
 export default function MovieDetailsPage() {
     const {url} = useRouteMatch();
@@ -19,6 +20,7 @@ export default function MovieDetailsPage() {
             <h2>Additional information</h2>
             <p><Link to={`${url}/cast`}>Cast</Link></p>
             <p><Link to={`${url}/reviews`}>Reviews</Link></p>
+
         </>
     )
 };
