@@ -37,7 +37,6 @@ export default function App() {
              <Route exact path="/movies/:movieId/reviews">
                <Reviews />
              </Route> */}
-
              <Route path='/movies/:movieId'
             render={props => {
               return <MovieDetailsPage {...props} />;
