@@ -6,22 +6,21 @@ import { useHistory, useLocation } from 'react-router';
 import * as moviedbAPI from '../services/moviedbAPI';
 import Searchbar from '../Components/Searchbar/Searchbar';
 
-// const useLocalStorage = (key, defaultValue) => {
-//    const [state, setState] = useState(() => {
-//        return JSON.parse(window.localStorage.getItem(key)) ?? defaultValue
-//    });
-//     return [state, setState]
-// };
-
-
 export default function MoviesPage() {
+
     const location = useLocation();
     const history = useHistory();
-
-    const [movies, setMovies] = useState([]);
-    console.log(movies);
+    const [movies, setMovies] = useState([]);    //массив
     const [name, setName] = useState('');
     const [status, setStatus] = useState('init');
+
+    useEffect(() => {
+        if (window.localStorage.getItem('movies')) {
+            setStatus('success');
+            setMovies(JSON.parse(window.localStorage.getItem('movies'))) //записала массив
+        }
+    }, []
+    );
     
     useEffect(() => {
         if (!name) {
@@ -31,7 +30,7 @@ export default function MoviesPage() {
         setStatus('pending');
         moviedbAPI.searchMoviedbAPI(name).then(r => {
             setMovies(r.results);
-            localStorage.setItem('movies', JSON.stringify(r.results));      
+            localStorage.setItem('movies', JSON.stringify(r.results));
             setStatus('success');
             if (r.results.length === 0) {
                 return setStatus('error')
@@ -39,14 +38,6 @@ export default function MoviesPage() {
         })
     }, [name]
     );
-
-    // useEffect(() => {
-    //     if (!JSON.parse(localStorage.getItem('movies'))) {
-    //         return;
-    //     }
-    //     setMovies(JSON.parse(localStorage.getItem('movies')))
-    // },[movies]        
-    // )
     
     const handleFormSubmit = name => {
         setName(name);
@@ -71,8 +62,7 @@ export default function MoviesPage() {
                         <Link to={{
                             pathname:`/movies/${movie.id}`,
                             state: {
-                                from: location,
-                                search:`query=${name}`
+                                from: location,                                
                             }
                         }}>{movie.title}</Link>
                     </li>)}

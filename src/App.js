@@ -3,18 +3,11 @@ import { Route, Switch } from 'react-router';
 import Container from './Components/Container';
 import Navigation from './Components/Navigation';
 
-// import HomePage from './views/HomePage';
-// import MoviesPage from './views/MoviesPage';
-// import MovieDetailsPage from './views/MovieDetailsPage';
-// import Cast from './views/Cast';
-// import Reviews from './views/Reviews';
-
-
 const HomePage = lazy(() => import('./views/HomePage' /* webpackChunkName:"HomePage" */));
 const MoviesPage = lazy(() => import('./views/MoviesPage' /* webpackChunkName:"MoviesPage" */));
 const MovieDetailsPage = lazy(() => import('./views/MovieDetailsPage' /* webpackChunkName:"MovieDetailsPage" */));
-const Cast = lazy(() => import('./views/Cast' /* webpackChunkName:"Cast" */));
-const Reviews = lazy(() => import('./views/Reviews' /* webpackChunkName:"Reviews" */));
+// const Cast = lazy(() => import('./views/Cast' /* webpackChunkName:"Cast" */));
+// const Reviews = lazy(() => import('./views/Reviews.js' /* webpackChunkName:"Reviews" */));
 
 
 export default function App() {
@@ -36,6 +29,23 @@ export default function App() {
              <Route path="/movies/:movieId" exact>
                <MovieDetailsPage />
              </Route>
+
+             {/* <Route exact path="/movies/:movieId/cast">
+               <Cast />
+             </Route>
+             
+             <Route exact path="/movies/:movieId/reviews">
+               <Reviews />
+             </Route> */}
+
+             <Route path='/movies/:movieId'
+            render={props => {
+              return <MovieDetailsPage {...props} />;
+            }} />
+          <Route path='/:movieId'
+            render={props => {
+              return <MovieDetailsPage {...props} />;
+            }} />
              
              <Route>
                <HomePage />

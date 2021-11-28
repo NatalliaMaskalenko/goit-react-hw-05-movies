@@ -13,9 +13,6 @@ export default function Cast() {
         moviedbAPI.actorsMoviedbAPI(movieId).then(r => setActors(r.cast));
     }, [movieId]
     );
-
-    console.log(actors);
-
     return (
         <>
            <ul>

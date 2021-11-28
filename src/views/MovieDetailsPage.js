@@ -1,22 +1,27 @@
 import { useState, useEffect } from 'react';
-import { lazy, Suspense } from 'react';
 import { Route, Switch } from 'react-router';
+import { lazy, Suspense } from 'react';
 import { Link, useParams, useRouteMatch } from 'react-router-dom';
 import { useHistory, useLocation } from 'react-router';
-
 import * as moviedbAPI from '../services/moviedbAPI';
 import MovieDetails from '../Components/MovieDetails';
 import Button from '../Components/Button';
-import Cast from './Cast';
-import Reviews from './Reviews';
+
+const Cast = lazy(() => import('./Cast' /* webpackChunkName:"Cast" */));
+const Reviews = lazy(() => import('./Reviews' /* webpackChunkName:"Reviews" */));
 
 
 export default function MovieDetailsPage() {
-    const {url} = useRouteMatch();
+    const { url, path } = useRouteMatch();
     const { movieId } = useParams();
     const history = useHistory();
     const location = useLocation();
     const [movie, setMovie] = useState(null);
+
+    console.log(url);
+    console.log(path);
+    console.log(history);
+    console.log(location);
 
     useEffect(() => {
         moviedbAPI.detailsMoviedbAPI(movieId).then(r => setMovie(r));
@@ -32,27 +37,33 @@ export default function MovieDetailsPage() {
             <Button onClick={handleClick}/>
             {movie && <MovieDetails movie={movie} />}
             <h2>Additional information</h2>
-            <Link to={{
-                pathname: `${url}/cast`,
-                state: {
-                    from: location,                    
-                }
-            }}>Cast</Link>
-            <br/>
-            <Link to={{
-                pathname: `${url}/reviews`,
-                state: {
-                    from: location,
-                }
-            }}>Reviews</Link>
+            <div>
+                <Link to={{
+                    pathname:`${url}/cast`,
+                    state: {
+                        from: location,
+                    }
+                }}>
+                    <p>Cast</p>
+                </Link>
+                
+                <Link to={{
+                    pathname:`${url}/reviews`,
+                    state: {
+                        from: location,
+                    }
+                }}>
+                    <p>Reviews</p>
+                </Link>
+            </div>
 
             <Suspense fallback="waiting...">
                 <Switch>
-                    <Route exact path="/movies/:movieId/cast">
+                    <Route path={`/movies/:movieId/cast`}>
                         <Cast />
                     </Route>
 
-                    <Route  exact path="/movies/:movieId/reviews">
+                    <Route path="/movies/:movieId/reviews">
                         <Reviews />
                     </Route>
                 </Switch>
@@ -60,7 +71,3 @@ export default function MovieDetailsPage() {
         </>
     )
 };
-
-{/* <Link to={`${url}/cast`}>Cast</Link>
-            <br/>
-            <Link to={`${url}/reviews`}>Reviews</Link> */}
