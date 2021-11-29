@@ -12,16 +12,11 @@ const Reviews = lazy(() => import('./Reviews' /* webpackChunkName:"Reviews" */))
 
 
 export default function MovieDetailsPage() {
-    const { url, path } = useRouteMatch();
+    const { url } = useRouteMatch();
     const { movieId } = useParams();
     const history = useHistory();
     const location = useLocation();
     const [movie, setMovie] = useState(null);
-
-    console.log(url);
-    console.log(path);
-    console.log(history);
-    console.log(location);
 
     useEffect(() => {
         moviedbAPI.detailsMoviedbAPI(movieId).then(r => setMovie(r));
